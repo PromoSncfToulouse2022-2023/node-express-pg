@@ -113,6 +113,27 @@ app.get('/mydb', async (req, res) =>
 })
 ```
 
+### Creer une route qui recoit des données venant du client
+```js
+app.post('/todos', async (req, res) => {
+    console.log(req.body);
+
+    try
+    {
+        const name = req.body.name;
+
+        const data = await client.query('INSERT INTO tablename (name) VALUES ($1)', [name]);
+
+        res.json(data.rows);
+    } 
+    catch (err)
+    {
+        console.log(err.stack)
+    }
+})
+
+```
+
 ### Pour creer une requete avec un parametre
 
 ```js
